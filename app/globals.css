@@ -1,8 +1,260 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:is(.dark *));
+
+.auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f3e8ff; /* Tailwind's bg-purple-100 */
+}
+
+.sidebar {
+  display: none; /* hidden */
+  height: 100vh; /* h-screen */
+  width: 18rem; /* w-72 (72 * 0.25rem = 18rem) */
+  background: linear-gradient(
+    135deg,
+    #667eea 0%,
+    #764ba2 100%
+  ); /* Beautiful gradient background */
+  padding: 1.5rem; /* p-6 */
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  z-index: 0;
+}
+
+.sidebar > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 1024px) {
+  .sidebar {
+    display: flex;
+  }
+}
+
+.sidebar-logo {
+  display: flex; /* flex */
+  align-items: center; /* items-center */
+  gap: 0.75rem; /* gap-3 */
+  padding: 1rem; /* p-4 */
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px; /* rounded-xl */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.sidebar-logo:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* md:py-2 → applies padding-top & padding-bottom at ≥768px */
+@media (min-width: 768px) {
+  .sidebar-logo {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+.sidebar-nav {
+  height: 100%; /* h-full */
+  flex-direction: column; /* flex-col */
+  justify-content: flex-start; /* justify-start */
+  margin-top: 1rem; /* mt-4 */
+}
+
+/* md:flex and md:gap-4 — apply at ≥768px */
+@media (min-width: 768px) {
+  .sidebar-nav {
+    display: flex; /* md:flex */
+    gap: 1rem; /* gap-4 → 4 × 0.25rem = 1rem */
+  }
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* gap-3 */
+  padding: 0.875rem 1rem; /* py-3.5 px-4 */
+  border-radius: 12px; /* rounded-xl */
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-link::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-link:hover::before {
+  transform: scaleX(1);
+}
+
+.sidebar-link:hover {
+  color: white;
+  transform: translateX(4px);
+}
+
+.sidebar-link-active {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.sidebar-link-active::before {
+  transform: scaleX(1);
+}
+
+.sidebar-icon {
+  width: 1.25rem; /* w-5 */
+  height: 1.25rem; /* h-5 */
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-link:hover .sidebar-icon {
+  transform: scale(1.1);
+}
+
+.sidebar-label {
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.sidebar-link:hover .sidebar-label {
+  font-weight: 600;
+}
+
+/* UserButton styling to match sidebar theme */
+.sidebar-link .cl-userButton-root {
+  color: white !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.sidebar-link .cl-userButton-root .cl-userButton-trigger {
+  color: white !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  justify-content: flex-start !important;
+}
+
+.sidebar-link .cl-userButton-root .cl-userButton-trigger span {
+  color: white !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+.sidebar-link .cl-userButton-root .cl-userButton-trigger div {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* More aggressive UserButton alignment fixes */
+.sidebar-link .cl-userButton-root,
+.sidebar-link .cl-userButton-root *,
+.sidebar-link .cl-userButton-trigger,
+.sidebar-link .cl-userButton-trigger * {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  text-align: left !important;
+}
+
+/* Override any internal UserButton spacing */
+.sidebar-link .cl-userButton-root .cl-userButton-trigger > * {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* Force left alignment for all UserButton content */
+.sidebar-link .cl-userButton-root .cl-userButton-trigger {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  text-align: left !important;
+}
+
+/* Match font size with navLinks */
+.sidebar-link .cl-userButton-root .cl-userButton-trigger span,
+.sidebar-link .cl-userButton-root .cl-userButton-trigger div {
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+}
+
+/* More comprehensive UserButton styling */
+.cl-userButton-root,
+.cl-userButton-root *,
+.cl-userButton-trigger,
+.cl-userButton-trigger *,
+.cl-userButton-trigger span,
+.cl-userButton-trigger div {
+  color: white !important;
+}
+
+/* Target the sidebar specifically */
+.sidebar .cl-userButton-root,
+.sidebar .cl-userButton-root *,
+.sidebar .cl-userButton-trigger,
+.sidebar .cl-userButton-trigger *,
+.sidebar .cl-userButton-trigger span,
+.sidebar .cl-userButton-trigger div {
+  color: white !important;
+}
+
+/* Specific styling for the sidebar user button */
+.sidebar-user-button {
+  color: white !important;
+}
+
+.sidebar-user-button * {
+  color: white !important;
+}
+
+.sidebar-user-button .cl-userButton-root,
+.sidebar-user-button .cl-userButton-trigger,
+.sidebar-user-button .cl-userButton-trigger *,
+.sidebar-user-button .cl-userButton-trigger span,
+.sidebar-user-button .cl-userButton-trigger div {
+  color: white !important;
 }
 
 @theme inline {
@@ -10,17 +262,115 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.129 0.042 264.695);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.129 0.042 264.695);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.129 0.042 264.695);
+  --primary: oklch(0.208 0.042 265.755);
+  --primary-foreground: oklch(0.984 0.003 247.858);
+  --secondary: oklch(0.968 0.007 247.896);
+  --secondary-foreground: oklch(0.208 0.042 265.755);
+  --muted: oklch(0.968 0.007 247.896);
+  --muted-foreground: oklch(0.554 0.046 257.417);
+  --accent: oklch(0.968 0.007 247.896);
+  --accent-foreground: oklch(0.208 0.042 265.755);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.929 0.013 255.508);
+  --input: oklch(0.929 0.013 255.508);
+  --ring: oklch(0.704 0.04 256.788);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.984 0.003 247.858);
+  --sidebar-foreground: oklch(0.129 0.042 264.695);
+  --sidebar-primary: oklch(0.208 0.042 265.755);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.968 0.007 247.896);
+  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
+  --sidebar-border: oklch(0.929 0.013 255.508);
+  --sidebar-ring: oklch(0.704 0.04 256.788);
+}
+
+.dark {
+  --background: oklch(0.129 0.042 264.695);
+  --foreground: oklch(0.984 0.003 247.858);
+  --card: oklch(0.208 0.042 265.755);
+  --card-foreground: oklch(0.984 0.003 247.858);
+  --popover: oklch(0.208 0.042 265.755);
+  --popover-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.929 0.013 255.508);
+  --primary-foreground: oklch(0.208 0.042 265.755);
+  --secondary: oklch(0.279 0.041 260.031);
+  --secondary-foreground: oklch(0.984 0.003 247.858);
+  --muted: oklch(0.279 0.041 260.031);
+  --muted-foreground: oklch(0.704 0.04 256.788);
+  --accent: oklch(0.279 0.041 260.031);
+  --accent-foreground: oklch(0.984 0.003 247.858);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.551 0.027 264.364);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.208 0.042 265.755);
+  --sidebar-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.279 0.041 260.031);
+  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.551 0.027 264.364);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground;
+  }
 }
