@@ -1,9 +1,9 @@
 "use server"
-import { revalidatePath } from "next/cache";
-import User from "../database/models/user.model"
-import { connectToDatabase } from "../database/mongoose"
-import { handleError } from "../utils";
 import { CreateUserParams, UpdateUserParams } from "@/types";
+import { revalidatePath } from "next/cache";
+import User from "../database/models/user.model";
+import { connectToDatabase } from "../database/mongoose";
+import { handleError } from "../utils";
 
   //this marks all of the export functions in this file as server actions A Server Action is a special async function that runs on the server, but you can call it directly from your client-side components (like a normal function).
 
