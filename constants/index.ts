@@ -87,10 +87,10 @@ export const transformationTypes = {
 
 }
 
-export const defaulValues ={
- title: "",
- aspectRation:"",
- color:"",
- prompt:"",
- publicId:"",
-}
+// export const defaulValues ={
+//  title: "",
+//  aspectRation:"",
+//  color:"",
+//  prompt:"",
+//  publicId:"",
+// }
