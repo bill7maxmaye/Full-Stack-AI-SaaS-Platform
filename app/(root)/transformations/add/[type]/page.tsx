@@ -1,11 +1,15 @@
-import Header from '@/components/shared/header';
-import TransformationForm from '@/components/shared/TransforationForm';
-import { transformationTypes } from '@/constants';
-import { searchParamProps } from '@/types';
-import React from 'react'
+import Header from "@/components/shared/header";
+import TransformationForm from "@/components/shared/TransforationForm";
+import { transformationTypes } from "@/constants";
+// Note: Inline props typing to match Next.js App Router expectations for dynamic routes
 
-const AddTransformationTypePage = ({ params: { type } }: searchParamProps) => {
-  const transformation = transformationTypes[type as keyof typeof transformationTypes];
+const AddTransformationTypePage = ({
+  params: { type },
+}: {
+  params: { type: string };
+}) => {
+  const transformation =
+    transformationTypes[type as keyof typeof transformationTypes];
 
   return (
     <>

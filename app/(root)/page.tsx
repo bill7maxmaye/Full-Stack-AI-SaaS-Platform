@@ -1,7 +1,7 @@
 import { UserButton } from "@clerk/nextjs";
 
 const HomePage = () => {
-  return 'HEmo helli';
+  return 'Homeeeee';
 };
 
 export default HomePage;
