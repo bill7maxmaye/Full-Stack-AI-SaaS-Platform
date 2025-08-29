@@ -20,12 +20,12 @@ export const navLinks = [
   },
   {
     label: "Object Remove",
-    route: "/transformations/add/remove",
+    route: "/transformations/add/objectRemove",
     icon: FaRemoveFormat
   },
   {
     label: "Object Recolor",
-    route: "/transformations/add/recolor",
+    route: "/transformations/add/objectRecolor",
     icon: FaPaintBrush,
   },
   {
@@ -44,3 +44,53 @@ export const navLinks = [
     icon: FaCreditCard,
   },
 ];
+
+
+export const transformationTypes = {
+  restore:{
+    type: "restore",
+    title: "Restore Image",
+    subTitle: "Refine images by removing noise and imperfections",
+    config:{restore:true},
+    icon:FaCode
+  },
+  removeBackground:{
+    type: "removeBackground",
+    title: "Remove Background",
+    subTitle: "Remove the backgrounds from images using AI",
+    config:{removeBackground:true},
+    icon:FaBoxesPacking
+  },
+
+  fill:{
+    type: "fill",
+    title: "Generative Fill",
+    subTitle: "Fill in missing parts of images",
+    config:{fill:true},
+    icon:FaProjectDiagram
+  },
+  objectRemove:{
+    type: "objectRemove",
+    title: "Object Remove",
+    subTitle: "Identify and remove objects from images",
+    config:{objectRemove:true},
+    icon:FaRemoveFormat
+  },
+
+  objectRecolor:{
+    type: "objectRecolor",
+    title: "Object Recolor",
+    subTitle: "Recolor specific objects in images",
+    config:{objectRecolor:true},
+    icon:FaBrush
+  }
+
+}
+
+export const defaulValues ={
+ title: "",
+ aspectRation:"",
+ color:"",
+ prompt:"",
+ publicId:"",
+}

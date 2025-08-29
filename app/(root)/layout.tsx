@@ -1,5 +1,5 @@
 import MobileNav from "@/components/shared/MobileNav";
-import Sidebar from "@/components/shared/sidebar";
+import Sidebar from "@/components/shared/Sidebar";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
