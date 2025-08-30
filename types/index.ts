@@ -107,3 +107,29 @@ export type searchParamProps = {
   params: { id: string; type: TransformationTypeKey };
   searchParams: { [key: string]: string | string[] | undefined };
 };
+
+export interface FormField {
+  name: string;
+  label: string;
+  type: 'text' | 'select';
+  placeholder: string;
+  required: boolean;
+  options?: Array<{
+    value: string;
+    label: string;
+  }>;
+}
+
+export interface FormFields {
+  [key: string]: FormField[];
+}
+
+export type TransformationType = 'fill' | 'restore' | 'removeBackground' | 'objectRemove' | 'objectRecolor';
+
+export interface FormData {
+  title: string;
+  aspectRatio?: string;
+  color?: string;
+  prompt?: string;
+  publicId?: string;
+}
