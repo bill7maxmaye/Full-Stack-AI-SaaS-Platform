@@ -5,9 +5,9 @@ import { ValidationSchemaType } from "@/constants/validation";
 
 // Note: Inline props typing to match Next.js App Router expectations for dynamic routes
 const AddTransformationTypePage = async (props: {
-  params: { type: string };
+  params: Promise<{ type: string }>;
 }) => {
-  const { type } = props.params;
+  const { type } = await props.params;
   const transformation =
     transformationTypes[type as keyof typeof transformationTypes];
 
